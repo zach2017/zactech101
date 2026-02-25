@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-colorblind="off">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Made Simple — A Friendly Guide for Seniors</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,500;7..72,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+ 
+ <style>
+    /* ========== CSS VARIABLES / THEMES ========== */
+    :root {
+      --font-heading: 'Literata', Georgia, serif;
+      --font-body: 'Source Sans 3', Verdana, sans-serif;
+      --radius: 16px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+      --transition: 0.3s ease;
+    }
+
+    /* LIGHT THEME */
+    [data-theme="light"] {
+      --bg-primary: #FFF8F0;
+      --bg-secondary: #FFFFFF;
+      --bg-accent: #FFF0E0;
+      --text-primary: #2D2016;
+      --text-secondary: #5C4A3A;
+      --text-muted: #8C7A6A;
+      --accent: #D4621A;
+      --accent-hover: #B8520F;
+      --accent-light: #FDEBD0;
+      --border: #E8D8C8;
+      --success: #2E8B57;
+      --info: #2874A6;
+      --warning: #D4A017;
+      --card-shadow: 0 4px 24px rgba(45,32,22,0.08);
+      --nav-bg: rgba(255,248,240,0.95);
+      --step-bg: #FFF5EB;
+      --tip-bg: #E8F8F0;
+      --tip-border: #2E8B57;
+      --warning-bg: #FFF8E1;
+      --warning-border: #D4A017;
+    }
+
+    /* DARK THEME */
+    [data-theme="dark"] {
+      --bg-primary: #1A1410;
+      --bg-secondary: #2A2018;
+      --bg-accent: #3A2A1A;
+      --text-primary: #F5EBE0;
+      --text-secondary: #D4C4B0;
+      --text-muted: #A08C78;
+      --accent: #F0923A;
+      --accent-hover: #F5A855;
+      --accent-light: #3D2A14;
+      --border: #4A3828;
+      --success: #5CB85C;
+      --info: #5DADE2;
+      --warning: #F0C040;
+      --card-shadow: 0 4px 24px rgba(0,0,0,0.3);
+      --nav-bg: rgba(26,20,16,0.95);
+      --step-bg: #2A2018;
+      --tip-bg: #1A2A1A;
+      --tip-border: #5CB85C;
+      --warning-bg: #2A2A10;
+      --warning-border: #F0C040;
+    }
+
+    /* COLOR BLIND MODE (Deuteranopia-friendly) */
+    [data-colorblind="on"] {
+      --accent: #0072B2;
+      --accent-hover: #005A8C;
+      --accent-light: #D0E8F5;
+      --success: #0072B2;
+      --info: #56B4E9;
+      --warning: #E69F00;
+      --tip-border: #0072B2;
+      --warning-border: #E69F00;
+    }
+    [data-colorblind="on"][data-theme="dark"] {
+      --accent: #56B4E9;
+      --accent-hover: #7CC4F0;
+      --accent-light: #1A2A3A;
+      --success: #56B4E9;
+      --info: #56B4E9;
+      --warning: #E69F00;
+      --tip-border: #56B4E9;
+      --warning-border: #E69F00;
+    }
+
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.75;
+      font-size: 18px;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    /* ========== ACCESSIBILITY BAR ========== */
+    .a11y-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--border);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .a11y-bar .site-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .a11y-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .a11y-btn {
+      background: var(--bg-accent);
+      color: var(--text-primary);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .a11y-btn:hover, .a11y-btn:focus {
+      background: var(--accent);
+      color: #FFF;
+      border-color: var(--accent);
+      outline: none;
+    }
+    .a11y-btn.active {
+      background: var(--accent);
+      color: #FFF;
+      border-color: var(--accent);
+    }
+    .a11y-btn .icon { font-size: 1.1em; }
+
+    .font-size-controls {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .font-size-controls span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-right: 4px;
+    }
+
+    /* ========== NAVIGATION ========== */
+    .main-nav {
+      position: fixed;
+      top: 62px;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px;
+      overflow-x: auto;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .nav-inner {
+      display: flex;
+      gap: 4px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 8px 0;
+    }
+
+    .nav-link {
+      display: block;
+      padding: 10px 16px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: 10px;
+      white-space: nowrap;
+      transition: all var(--transition);
+    }
+    .nav-link:hover, .nav-link:focus {
+      background: var(--accent-light);
+      color: var(--accent);
+      outline: none;
+    }
+    .nav-link.active-section {
+      background: var(--accent);
+      color: #FFF;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      margin-top: 130px;
+      padding: 60px 24px 50px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--bg-accent), var(--bg-primary));
+    }
+
+    .hero-emoji {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 16px;
+      animation: wave 2s ease-in-out infinite;
+    }
+    @keyframes wave {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(12deg); }
+      75% { transform: rotate(-8deg); }
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .hero h1 em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* ========== MAIN CONTENT ========== */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ========== SECTION STYLES ========== */
+    .section {
+      margin-top: 56px;
+      animation: fadeUp 0.6s ease-out both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 3px solid var(--accent);
+    }
+
+    .section-icon {
+      font-size: 2.4rem;
+      flex-shrink: 0;
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-light);
+      border-radius: 16px;
+    }
+
+    .section-header h2 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .section-intro {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      line-height: 1.8;
+    }
+
+    /* ========== CARDS ========== */
+    .card {
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: var(--card-shadow);
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card p, .card li {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    /* ========== STEP-BY-STEP ========== */
+    .steps {
+      counter-reset: step-counter;
+      list-style: none;
+      padding: 0;
+    }
+
+    .step {
+      counter-increment: step-counter;
+      display: flex;
+      gap: 18px;
+      margin-bottom: 20px;
+      padding: 20px;
+      background: var(--step-bg);
+      border-radius: var(--radius);
+      border-left: 4px solid var(--accent);
+      transition: background var(--transition);
+    }
+
+    .step-number {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      background: var(--accent);
+      color: #FFF;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.15rem;
+      font-family: var(--font-heading);
+    }
+
+    .step-content h4 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+    }
+
+    /* ========== TIP & WARNING BOXES ========== */
+    .tip-box, .warning-box {
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin: 20px 0;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .tip-box {
+      background: var(--tip-bg);
+      border-left: 5px solid var(--tip-border);
+    }
+    .warning-box {
+      background: var(--warning-bg);
+      border-left: 5px solid var(--warning-border);
+    }
+    .tip-box .box-icon, .warning-box .box-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .box-content strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+    .box-content p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    /* ========== COLLAPSIBLE / ACCORDION ========== */
+    .accordion {
+      margin: 16px 0;
+    }
+    .accordion-trigger {
+      width: 100%;
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 24px;
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: all var(--transition);
+      text-align: left;
+    }
+    .accordion-trigger:hover {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+    .accordion-trigger .arrow {
+      font-size: 1.3rem;
+      transition: transform var(--transition);
+      color: var(--accent);
+    }
+    .accordion-trigger[aria-expanded="true"] .arrow {
+      transform: rotate(180deg);
+    }
+    .accordion-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      padding: 0 24px;
+    }
+    .accordion-panel.open {
+      max-height: 2000px;
+      padding: 20px 24px;
+    }
+    .accordion-panel p, .accordion-panel li {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+
+    /* ========== TERM DEFINITIONS ========== */
+    .term {
+      display: inline;
+      border-bottom: 2px dashed var(--accent);
+      cursor: help;
+      position: relative;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    .term:hover .term-def, .term:focus .term-def {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .term-def {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 0;
+      background: var(--bg-secondary);
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      min-width: 240px;
+      max-width: 320px;
+      box-shadow: var(--card-shadow);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(6px);
+      transition: all 0.2s ease;
+      z-index: 100;
+      line-height: 1.5;
+    }
+
+    /* ========== IMAGE PLACEHOLDERS ========== */
+    .visual-guide {
+      background: var(--bg-accent);
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      text-align: center;
+      margin: 20px 0;
+      font-size: 3rem;
+    }
+    .visual-guide p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* ========== RESOURCES SECTION ========== */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .resource-card {
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-decoration: none;
+      transition: all var(--transition);
+      display: block;
+    }
+    .resource-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: var(--card-shadow);
+    }
+    .resource-card .res-icon { font-size: 2rem; margin-bottom: 10px; display: block; }
+    .resource-card h4 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .resource-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .resource-card .res-link {
+      display: inline-block;
+      margin-top: 10px;
+      font-weight: 600;
+      color: var(--accent);
+      font-size: 0.95rem;
+    }
+
+    /* ========== PROGRESS TRACKER ========== */
+    .progress-bar-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: background var(--transition);
+    }
+    .progress-bar-container span {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .progress-track {
+      flex: 1;
+      height: 10px;
+      background: var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 8px;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* ========== BACK TO TOP ========== */
+    .back-to-top {
+      position: fixed;
+      bottom: 56px;
+      right: 24px;
+      z-index: 999;
+      background: var(--accent);
+      color: #FFF;
+      border: none;
+      border-radius: 50%;
+      width: 52px;
+      height: 52px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition);
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .back-to-top:hover {
+      background: var(--accent-hover);
+      transform: scale(1.1);
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: var(--bg-accent);
+      border-top: 2px solid var(--border);
+      padding: 40px 24px 100px;
+      text-align: center;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    footer p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    footer a {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    /* ========== MOBILE RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      body { font-size: 20px; }
+
+      .a11y-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 14px;
+      }
+      .a11y-controls { gap: 6px; }
+      .a11y-btn { padding: 7px 10px; font-size: 0.82rem; }
+
+      .main-nav { top: auto; top: 94px; }
+      .nav-link { padding: 8px 12px; font-size: 0.88rem; }
+
+      .hero { margin-top: 150px; padding: 40px 18px 36px; }
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1.1rem; }
+
+      .container { padding: 0 16px 80px; }
+
+      .section-header { flex-direction: column; text-align: center; gap: 10px; }
+      .section-header h2 { font-size: 1.5rem; }
+      .section-icon { width: 56px; height: 56px; font-size: 2rem; }
+
+      .card { padding: 20px; }
+      .card h3 { font-size: 1.2rem; }
+
+      .step { flex-direction: column; gap: 10px; }
+
+      .resource-grid { grid-template-columns: 1fr; }
+
+      .term-def {
+        position: fixed;
+        bottom: 60px;
+        left: 16px;
+        right: 16px;
+        top: auto;
+        min-width: auto;
+        max-width: none;
+      }
+    }
+
+    /* Large font mode */
+    body.font-large {
+      font-size: 22px;
+    }
+    body.font-xlarge {
+      font-size: 26px;
+    }
+
+    @media (max-width: 768px) {
+      body.font-large { font-size: 24px; }
+      body.font-xlarge { font-size: 28px; }
+    }
+
+    /* Print styles */
+    @media print {
+      .a11y-bar, .main-nav, .progress-bar-container, .back-to-top { display: none !important; }
+      .hero { margin-top: 0; }
+      body { font-size: 14px; color: #000; background: #FFF; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ACCESSIBILITY BAR -->
+  <div class="a11y-bar" role="toolbar" aria-label="Display settings">
+    <span class="site-title">📖 Tech Made Simple</span>
+    <div class="a11y-controls">
+      <div class="font-size-controls">
+        <span>Text:</span>
+        <button class="a11y-btn" onclick="setFontSize('normal')" aria-label="Normal text size">A</button>
+        <button class="a11y-btn" onclick="setFontSize('large')" aria-label="Large text size" style="font-size:1.05rem">A+</button>
+        <button class="a11y-btn" onclick="setFontSize('xlarge')" aria-label="Extra large text size" style="font-size:1.15rem">A++</button>
+      </div>
+      <button class="a11y-btn" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <span class="icon">🌙</span> Dark Mode
+      </button>
+      <button class="a11y-btn" id="cbToggle" onclick="toggleColorBlind()" aria-label="Toggle color blind mode">
+        <span class="icon">👁</span> Color Blind
+      </button>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="main-nav" role="navigation" aria-label="Main topics">
+    <div class="nav-inner">
+      <a href="#phone-basics" class="nav-link">📱 Phone</a>
+      <a href="#computer-basics" class="nav-link">💻 Computer</a>
+      <a href="#gmail" class="nav-link">📧 Gmail</a>
+      <a href="#ai-intro" class="nav-link">🤖 AI &amp; Gemini</a>
+      <a href="#safety" class="nav-link">🛡 Safety</a>
+      <a href="#glossary" class="nav-link">📚 Glossary</a>
+      <a href="#resources" class="nav-link">🔗 Resources</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="hero-emoji" aria-hidden="true">👋</span>
+    <h1>Welcome! <em>Technology</em> is for <em>Everyone.</em></h1>
+    <p>A friendly, step-by-step guide to help you feel confident using your phone, computer, email, and even Artificial Intelligence. Go at your own pace — there's no rush!</p>
+  </header>
+
+  <main class="container">
+
+    <!-- ============================= -->
+    <!-- SECTION 1: PHONE BASICS -->
+    <!-- ============================= -->
+    <section class="section" id="phone-basics">
+      <div class="section-header">
+        <div class="section-icon">📱</div>
+        <h2>Phone Basics</h2>
+      </div>
+      <p class="section-intro">
+        Your smartphone is like a tiny computer in your pocket. Let's start with the basics — how to turn it on, navigate around, and do everyday things like making calls and sending texts.
+      </p>
+
+      <!-- Knowing Your Phone -->
+      <div class="card">
+        <h3>🔍 Getting to Know Your Phone</h3>
+        <p>
+          Your phone has two main types: <strong>iPhone</strong> (made by Apple) or <strong>Android</strong> (made by Samsung, Google, and others). Both work similarly — they have a touchscreen you tap with your finger, a Home Screen with small pictures called <span class="term" tabindex="0">apps<span class="term-def">An "app" is short for application — it's a small program on your phone that does one thing, like making calls, checking the weather, or watching videos.</span></span>, and buttons on the side for volume and power.
+        </p>
+      </div>
+
+      <!-- Turning On / Off -->
+      <div class="card">
+        <h3>⚡ Turning Your Phone On and Off</h3>
+        <ol class="steps">
+          <li class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Power Button</h4>
+              <p>Find the button on the <strong>right side</strong> of your phone. Press and <strong>hold it</strong> for about 3 seconds until the screen lights up.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Unlock Your Phone</h4>
+              <p>Swipe up on the screen (drag your finger upward). You may need to enter a <strong>PIN code</strong> (a short number you set up), use your <strong>fingerprint</strong>, or look at the phone for <strong>Face ID</strong>.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>To Turn Off</h4>
+              <p>Press and hold the power button again. A "Slide to Power Off" or "Power Off" option will appear on screen. Tap or slide it.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Making Calls & Texts -->
+      <div class="card">
+        <h3>📞 Making Calls and Sending Texts</h3>
+        <ol class="steps">
+          <li class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Making a Phone Call</h4>
+              <p>Tap the <strong>Phone app</strong> (looks like a green phone icon). You can tap <strong>"Keypad"</strong> to type in a number, or tap <strong>"Contacts"</strong> to find someone you've already saved. Tap the <strong>green call button</strong> to call.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Sending a Text Message</h4>
+              <p>Tap the <strong>Messages app</strong> (speech bubble icon). Tap the <strong>pencil/compose</strong> button to start a new message. Type the person's name or number at the top, write your message at the bottom, and tap the <strong>Send arrow</strong>.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="tip-box">
+        <span class="box-icon" aria-hidden="true">💡</span>
+        <div class="box-content">
+          <strong>Helpful Tip</strong>
+          <p>If the text on your phone is too small, go to <strong>Settings → Display → Font Size</strong> and make it bigger. You deserve to read comfortably!</p>
+        </div>
+      </div>
+
+      <!-- Wi-Fi -->
+      <div class="accordion">
+        <button class="accordion-trigger" aria-expanded="false" onclick="toggleAccordion(this)">
+          📶 How to Connect to Wi-Fi
+          <span class="arrow">▼</span>
+        </button>
+        <div class="accordion-panel">
+          <p><strong>Wi-Fi</strong> is like an invisible internet signal in your home (from your router/modem). Connecting to it is free and faster than using your phone's data plan.</p>
+          <p><strong>To connect:</strong> Open <strong>Settings</strong> → Tap <strong>Wi-Fi</strong> → Make sure Wi-Fi is turned <strong>ON</strong> → Find your home network name in the list → Tap it → Enter the <strong>password</strong> (often on a sticker on your router) → Tap <strong>Join</strong> or <strong>Connect</strong>.</p>
+          <p>Once connected, your phone will remember this network and connect automatically in the future.</p>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="accordion-trigger" aria-expanded="false" onclick="toggleAccordion(this)">
+          📸 Taking a Photo
+          <span class="arrow">▼</span>
+        </button>
+        <div class="accordion-panel">
+          <p>Open the <strong>Camera app</strong> (looks like a camera icon). Hold your phone steady and point it at what you want to photograph. Tap the big <strong>round button</strong> at the bottom to take the photo. Your photos are saved automatically in the <strong>Photos</strong> or <strong>Gallery</strong> app.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- SECTION 2: COMPUTER BASICS -->
+    <!-- ============================= -->
+    <section class="section" id="computer-basics">
+      <div class="section-header">
+        <div class="section-icon">💻</div>
+        <h2>Computer Basics</h2>
+      </div>
+      <p class="section-intro">
+        Whether you have a desktop (a bigger computer that sits on a desk) or a laptop (a portable, fold-open computer), the basics are the same. Let's walk through the essentials.
+      </p>
+
+      <div class="card">
+        <h3>🖥 Parts of Your Computer</h3>
+        <p>
+          Your computer has a <strong>screen</strong> (monitor) that displays everything, a <strong>keyboard</strong> for typing, and a <strong>mouse</strong> or <strong>trackpad</strong> (on laptops) for pointing and clicking. The <strong>cursor</strong> is the small arrow on screen that moves when you move the mouse.
+        </p>
+        <p style="margin-top: 12px;">
+          <strong>Left-click</strong> (pressing the left mouse button) selects or opens things. <strong>Right-click</strong> (pressing the right button) shows extra options. <strong>Double-click</strong> (clicking twice quickly) opens files and programs.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🌐 Using a Web Browser (Surfing the Internet)</h3>
+        <p>
+          A <span class="term" tabindex="0">web browser<span class="term-def">A web browser is the program you use to visit websites. Common ones include Google Chrome, Microsoft Edge, Mozilla Firefox, and Safari.</span></span> is how you visit websites. You probably have one already on your computer — look for <strong>Chrome</strong> (colorful circle), <strong>Edge</strong> (blue "e"), or <strong>Safari</strong> (compass icon on Mac).
+        </p>
+        <ol class="steps" style="margin-top: 16px;">
+          <li class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Open the Browser</h4>
+              <p>Double-click the browser icon on your desktop or find it in your Start Menu (Windows) or Dock (Mac).</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Type a Website Address</h4>
+              <p>Click on the <strong>address bar</strong> at the top (where you see a web address or "Search"). Type in a website, like <strong>google.com</strong>, and press <strong>Enter</strong> on your keyboard.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Search for Anything</h4>
+              <p>You can also type a question or topic directly in the address bar — like "weather today" or "apple pie recipe" — and it will search the internet for you.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="tip-box">
+        <span class="box-icon" aria-hidden="true">💡</span>
+        <div class="box-content">
+          <strong>Zoom In on Any Website</strong>
+          <p>If text on a website is too small, hold the <strong>Ctrl</strong> key (or <strong>Command</strong> on Mac) and press the <strong>+</strong> key to make everything bigger. Press <strong>-</strong> to make it smaller again.</p>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="accordion-trigger" aria-expanded="false" onclick="toggleAccordion(this)">
+          📁 Understanding Files and Folders
+          <span class="arrow">▼</span>
+        </button>
+        <div class="accordion-panel">
+          <p>Think of your computer like a filing cabinet. <strong>Files</strong> are your documents, photos, and other items. <strong>Folders</strong> are containers that hold files, just like physical folders in a cabinet.</p>
+          <p>On Windows, open <strong>File Explorer</strong> (yellow folder icon in the taskbar). On Mac, open <strong>Finder</strong> (the smiley face icon in the Dock). You'll see folders like <strong>Documents</strong>, <strong>Pictures</strong>, and <strong>Downloads</strong>.</p>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="accordion-trigger" aria-expanded="false" onclick="toggleAccordion(this)">
+          🖨 Printing a Document or Page
+          <span class="arrow">▼</span>
+        </button>
+        <div class="accordion-panel">
+          <p>To print almost anything on your computer, press <strong>Ctrl + P</strong> (Windows) or <strong>Command + P</strong> (Mac). A print window will appear where you can choose your printer and how many copies. Then click <strong>Print</strong>.</p>
+          <p>Make sure your printer is turned on and connected to the same Wi-Fi network as your computer.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- SECTION 3: CREATING A GMAIL -->
+    <!-- ============================= -->
+    <section class="section" id="gmail">
+      <div class="section-header">
+        <div class="section-icon">📧</div>
+        <h2>Creating a Gmail Account</h2>
+      </div>
+      <p class="section-intro">
+        Gmail is a free email service by Google. Having an email address is like having a digital mailbox — it lets you send and receive messages, sign up for things, and stay connected with family and friends. Let's set one up!
+      </p>
+
+      <div class="card">
+        <h3>📝 Step-by-Step: Create Your Gmail</h3>
+        <ol class="steps">
+          <li class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Open Your Browser</h4>
+              <p>On your phone or computer, open a web browser (Chrome, Safari, Edge). In the address bar at the top, type <strong>gmail.com</strong> and press Enter.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Click "Create Account"</h4>
+              <p>On the Gmail sign-in page, look for <strong>"Create account"</strong> and click it. Choose <strong>"For my personal use"</strong>.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Enter Your Name</h4>
+              <p>Type your <strong>first name</strong> and <strong>last name</strong> in the boxes. This is the name people will see when you send them an email.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h4>Choose Your Email Address</h4>
+              <p>Pick a <strong>username</strong> — this becomes your email address (e.g., <em>janedoe2025@gmail.com</em>). If the name is taken, Google will suggest alternatives. Pick something you'll remember easily!</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <h4>Create a Strong Password</h4>
+              <p>Your password should be at least <strong>8 characters</strong> with a mix of letters, numbers, and symbols. Example: <em>Sunshine2025!</em> — Write it down somewhere safe at home. You'll type it twice to confirm.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number">6</div>
+            <div class="step-content">
+              <h4>Add Recovery Info (Recommended)</h4>
+              <p>Google will ask for a <strong>phone number</strong> and/or a <strong>backup email</strong>. This helps you get back in if you forget your password. Your phone number is the best option here.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number">7</div>
+            <div class="step-content">
+              <h4>Agree and You're Done!</h4>
+              <p>Review Google's terms, click <strong>"I agree"</strong>, and your new Gmail account is ready. You'll be taken to your <strong>inbox</strong> — this is where your emails will appear.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="warning-box">
+        <span class="box-icon" aria-hidden="true">⚠️</span>
+        <div class="box-content">
+          <strong>Important: Remember Your Password!</strong>
+          <p>Write your email address and password on a piece of paper and keep it in a safe place (like a drawer or a small notebook). Don't share your password with strangers or in emails.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>✉️ How to Send Your First Email</h3>
+        <ol class="steps">
+          <li class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Click "Compose"</h4>
+              <p>In Gmail, click the big <strong>"Compose"</strong> button (usually top-left with a <strong>+</strong> symbol). A new message window will pop up.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Fill in the Details</h4>
+              <p><strong>To:</strong> Type the email address of the person you want to write to. <strong>Subject:</strong> Write a short description (like "Hello from Grandma!"). Then type your message in the big box below.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Click "Send"</h4>
+              <p>When you're ready, click the blue <strong>"Send"</strong> button. Your email is on its way!</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="tip-box">
+        <span class="box-icon" aria-hidden="true">💡</span>
+        <div class="box-content">
+          <strong>Check Your Email Regularly</strong>
+          <p>Open Gmail at least once a day, just like checking your physical mailbox. New unread messages appear in <strong>bold</strong> in your inbox.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- SECTION 4: AI & GEMINI INTRO -->
+    <!-- ============================= -->
+    <section class="section" id="ai-intro">
+      <div class="section-header">
+        <div class="section-icon">🤖</div>
+        <h2>Introduction to AI &amp; Google Gemini</h2>
+      </div>
+      <p class="section-intro">
+        You may have heard about "Artificial Intelligence" or "AI" in the news. It's not as scary as it sounds! Let's break it down in plain English and show you how to try it yourself with Google Gemini.
+      </p>
+
+      <div class="card">
+        <h3>🧠 What is Artificial Intelligence (AI)?</h3>
+        <p>
+          <span class="term" tabindex="0">Artificial Intelligence<span class="term-def">Artificial Intelligence (AI) is computer software that can learn patterns and perform tasks that usually require human thinking — like understanding language, recognizing pictures, or answering questions.</span></span> is a type of computer program that can understand your questions and give you helpful answers, almost like talking to a very knowledgeable assistant. AI can understand and respond in everyday language — you don't need to learn any special computer commands.
+        </p>
+        <p style="margin-top: 12px;">
+          Think of it as a very smart helper that has read millions of books and articles and can summarize information for you. It's a <strong>tool</strong> — like a calculator for information.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>✨ What is Google Gemini?</h3>
+        <p>
+          <strong>Google Gemini</strong> (formerly called "Bard") is Google's AI assistant. You can type questions or requests in plain English, and it will answer you. It's free to use if you have a Google/Gmail account — which you just created!
+        </p>
+        <p style="margin-top: 12px;">
+          <strong>Things you can ask Gemini:</strong>
+        </p>
+        <p style="margin-top: 8px;">
+          "Explain what a 401(k) is in simple terms" — "Write a birthday card message for my granddaughter" — "What are some easy dinner recipes with chicken?" — "Tell me about the history of Montgomery, Alabama" — "Help me write a polite email to my doctor's office."
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🚀 How to Use Google Gemini</h3>
+        <ol class="steps">
+          <li class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Go to Gemini</h4>
+              <p>Open your browser and go to <strong>gemini.google.com</strong>. Sign in with your Gmail account if asked.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Type Your Question</h4>
+              <p>You'll see a text box at the bottom that says something like "Ask Gemini." Type your question in plain English, just like you'd ask a friend. Then press <strong>Enter</strong> or tap the <strong>Send</strong> button.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Read the Response</h4>
+              <p>Gemini will type out an answer for you. You can ask <strong>follow-up questions</strong> — it remembers what you were talking about in the same conversation.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h4>Start a New Topic</h4>
+              <p>Click <strong>"New Chat"</strong> on the left side to start a fresh conversation on a different topic.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="warning-box">
+        <span class="box-icon" aria-hidden="true">⚠️</span>
+        <div class="box-content">
+          <strong>Important: AI is Helpful but Not Perfect</strong>
+          <p>AI can sometimes give wrong or outdated information. Always <strong>double-check important facts</strong>, especially about health, finances, or legal matters. Never share your passwords, Social Security number, or bank details with any AI tool.</p>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <span class="box-icon" aria-hidden="true">💡</span>
+        <div class="box-content">
+          <strong>Good Questions to Start With</strong>
+          <p>Try these to practice: "What's the weather going to be like this week?" or "Can you explain Medicare Part B in simple words?" or "Help me write a thank-you note to my neighbor."</p>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="accordion-trigger" aria-expanded="false" onclick="toggleAccordion(this)">
+          🗣 Can I Talk to AI with My Voice?
+          <span class="arrow">▼</span>
+        </button>
+        <div class="accordion-panel">
+          <p>Yes! On your phone, the Google app or Google Assistant can listen to your voice. Just say <strong>"Hey Google"</strong> and ask your question out loud. On Gemini's website, look for a <strong>microphone icon</strong> — tap it and speak your question instead of typing.</p>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="accordion-trigger" aria-expanded="false" onclick="toggleAccordion(this)">
+          🔒 Is AI Safe to Use?
+          <span class="arrow">▼</span>
+        </button>
+        <div class="accordion-panel">
+          <p>AI tools like Google Gemini are generally safe for everyday questions and tasks. Just remember these rules:</p>
+          <p>• <strong>Don't share personal information</strong> like your Social Security number, bank account numbers, or passwords.</p>
+          <p>• <strong>Don't trust it blindly</strong> for medical or legal advice — always consult a professional.</p>
+          <p>• <strong>It's okay to experiment!</strong> You can't break anything by asking questions. If you get a weird answer, just try asking differently.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- SECTION 5: ONLINE SAFETY -->
+    <!-- ============================= -->
+    <section class="section" id="safety">
+      <div class="section-header">
+        <div class="section-icon">🛡</div>
+        <h2>Staying Safe Online</h2>
+      </div>
+      <p class="section-intro">
+        The internet is wonderful, but just like in the real world, it pays to be careful. Here are some simple rules to keep you safe.
+      </p>
+
+      <div class="card">
+        <h3>🔐 Password Safety</h3>
+        <p>Use a <strong>different password</strong> for each important account (email, bank, etc.). A good password has at least 8 characters with a mix of uppercase, lowercase, numbers, and symbols. Keep passwords written down in a <strong>physical notebook at home</strong> — not on sticky notes on your screen!</p>
+      </div>
+
+      <div class="card">
+        <h3>🎣 Avoiding Scams (Phishing)</h3>
+        <p>
+          <span class="term" tabindex="0">Phishing<span class="term-def">Phishing is when scammers send fake emails or messages pretending to be a real company (like your bank or Amazon) to trick you into sharing personal information.</span></span> is when someone sends a fake email or message pretending to be your bank, the IRS, or a company you know. Their goal is to trick you into clicking a link and giving them your information.
+        </p>
+        <p style="margin-top: 12px;"><strong>Red flags to watch for:</strong> Urgent messages saying "act now or lose your account," emails from strange addresses, requests for your password or Social Security number, and deals that seem too good to be true. When in doubt, <strong>don't click</strong> — call the company directly using the phone number on their real website.</p>
+      </div>
+
+      <div class="warning-box">
+        <span class="box-icon" aria-hidden="true">⚠️</span>
+        <div class="box-content">
+          <strong>Golden Rule of Online Safety</strong>
+          <p>No legitimate company — not your bank, not the IRS, not Google, not Medicare — will ever ask for your password or full Social Security number via email, text, or phone. If someone does, it's a scam.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🔄 Keeping Things Updated</h3>
+        <p>When your phone or computer says there's an <strong>update available</strong>, that's a good thing! Updates fix security holes and keep your device safe. Tap <strong>"Update Now"</strong> or <strong>"Install"</strong> when you see these messages, ideally when you're connected to Wi-Fi and plugged in to charge.</p>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- SECTION 6: GLOSSARY -->
+    <!-- ============================= -->
+    <section class="section" id="glossary">
+      <div class="section-header">
+        <div class="section-icon">📚</div>
+        <h2>Simple Tech Glossary</h2>
+      </div>
+      <p class="section-intro">Don't let tech jargon intimidate you. Here are plain-English explanations for common terms you'll encounter.</p>
+
+      <div class="card">
+        <h3>Common Terms</h3>
+        <dl style="display: grid; gap: 16px;">
+          <div>
+            <dt style="font-weight: 700; color: var(--accent); font-size: 1.1rem;">App (Application)</dt>
+            <dd style="color: var(--text-secondary);">A small program on your phone or computer that does one job — like a calculator, weather report, or email.</dd>
+          </div>
+          <div>
+            <dt style="font-weight: 700; color: var(--accent); font-size: 1.1rem;">Browser</dt>
+            <dd style="color: var(--text-secondary);">The program you use to visit websites (Chrome, Safari, Edge, Firefox).</dd>
+          </div>
+          <div>
+            <dt style="font-weight: 700; color: var(--accent); font-size: 1.1rem;">Cloud</dt>
+            <dd style="color: var(--text-secondary);">A way to store your files (photos, documents) on the internet instead of just on your device. Services like Google Drive, iCloud, and Dropbox use "the cloud."</dd>
+          </div>
+          <div>
+            <dt style="font-weight: 700; color: var(--accent); font-size: 1.1rem;">Download</dt>
+            <dd style="color: var(--text-secondary);">Copying something from the internet onto your device (like saving a photo or installing an app).</dd>
+          </div>
+          <div>
+            <dt style="font-weight: 700; color: var(--accent); font-size: 1.1rem;">Link / URL</dt>
+            <dd style="color: var(--text-secondary);">A web address you can click to visit a website (like www.google.com). Links are usually blue and underlined.</dd>
+          </div>
+          <div>
+            <dt style="font-weight: 700; color: var(--accent); font-size: 1.1rem;">Wi-Fi</dt>
+            <dd style="color: var(--text-secondary);">A wireless internet connection, usually from a small box (router) in your home. It lets your devices connect to the internet without cables.</dd>
+          </div>
+          <div>
+            <dt style="font-weight: 700; color: var(--accent); font-size: 1.1rem;">Bluetooth</dt>
+            <dd style="color: var(--text-secondary);">A way for devices to connect wirelessly over short distances — like connecting headphones or a speaker to your phone.</dd>
+          </div>
+          <div>
+            <dt style="font-weight: 700; color: var(--accent); font-size: 1.1rem;">Screenshot</dt>
+            <dd style="color: var(--text-secondary);">A picture of what's currently showing on your screen. Useful for saving information or showing someone what you see.</dd>
+          </div>
+          <div>
+            <dt style="font-weight: 700; color: var(--accent); font-size: 1.1rem;">AI (Artificial Intelligence)</dt>
+            <dd style="color: var(--text-secondary);">Computer programs that can understand language, answer questions, and help with tasks — like Google Gemini or Siri.</dd>
+          </div>
+          <div>
+            <dt style="font-weight: 700; color: var(--accent); font-size: 1.1rem;">Spam</dt>
+            <dd style="color: var(--text-secondary);">Unwanted junk messages or emails, often ads or scams. Most email services filter these into a "Spam" folder automatically.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- SECTION 7: RESOURCES -->
+    <!-- ============================= -->
+    <section class="section" id="resources">
+      <div class="section-header">
+        <div class="section-icon">🔗</div>
+        <h2>Helpful Resources &amp; Links</h2>
+      </div>
+      <p class="section-intro">
+        These trusted websites offer free tutorials, guides, and support for learning technology. Bookmark them (press Ctrl+D or Command+D) to find them easily later!
+      </p>
+
+      <div class="resource-grid">
+        <a href="https://www.aarp.org/home-family/personal-technology/" target="_blank" rel="noopener" class="resource-card">
+          <span class="res-icon" aria-hidden="true">🏠</span>
+          <h4>AARP Technology Resources</h4>
+          <p>Free tech guides, tips, and how-to articles written specifically for older adults.</p>
+          <span class="res-link">Visit aarp.org →</span>
+        </a>
+
+        <a href="https://www.aarp.org/home-family/personal-technology/info-2024/how-to-use-google-gemini-ai.html" target="_blank" rel="noopener" class="resource-card">
+          <span class="res-icon" aria-hidden="true">🤖</span>
+          <h4>AARP: How to Use Gemini AI</h4>
+          <p>AARP's beginner guide specifically about using Google's Gemini AI assistant.</p>
+          <span class="res-link">Read the guide →</span>
+        </a>
+
+        <a href="https://edu.gcfglobal.org/en/computerbasics/" target="_blank" rel="noopener" class="resource-card">
+          <span class="res-icon" aria-hidden="true">🎓</span>
+          <h4>GCFGlobal: Computer Basics</h4>
+          <p>Free, patient, step-by-step computer tutorials with pictures and videos from the Goodwill Foundation.</p>
+          <span class="res-link">Start learning →</span>
+        </a>
+
+        <a href="https://edu.gcfglobal.org/en/gmail/" target="_blank" rel="noopener" class="resource-card">
+          <span class="res-icon" aria-hidden="true">📧</span>
+          <h4>GCFGlobal: Gmail Tutorial</h4>
+          <p>Step-by-step Gmail lessons from creating an account to managing your inbox.</p>
+          <span class="res-link">Learn Gmail →</span>
+        </a>
+
+        <a href="https://support.google.com/mail/answer/56256" target="_blank" rel="noopener" class="resource-card">
+          <span class="res-icon" aria-hidden="true">📖</span>
+          <h4>Google: Create a Gmail Account</h4>
+          <p>Official Google help page for setting up your Gmail account with screenshots.</p>
+          <span class="res-link">Official guide →</span>
+        </a>
+
+        <a href="https://gemini.google.com/" target="_blank" rel="noopener" class="resource-card">
+          <span class="res-icon" aria-hidden="true">✨</span>
+          <h4>Try Google Gemini</h4>
+          <p>Go directly to Google Gemini to start asking questions and exploring AI for yourself.</p>
+          <span class="res-link">Try Gemini →</span>
+        </a>
+
+        <a href="https://www.seniorplanet.org/" target="_blank" rel="noopener" class="resource-card">
+          <span class="res-icon" aria-hidden="true">🌎</span>
+          <h4>Senior Planet</h4>
+          <p>Free technology classes and programs for older adults, both online and in person.</p>
+          <span class="res-link">Visit Senior Planet →</span>
+        </a>
+
+        <a href="https://www.cyber.gov.au/learn-basics" target="_blank" rel="noopener" class="resource-card">
+          <span class="res-icon" aria-hidden="true">🛡</span>
+          <h4>Online Safety Basics</h4>
+          <p>Simple guides for staying safe online — passwords, scams, and protecting your information.</p>
+          <span class="res-link">Learn safety basics →</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>📖 <strong>Tech Made Simple</strong> — Created with care for lifelong learners.</p>
+    <p style="margin-top:8px;">Remember: Everyone was a beginner once. You're doing great!</p>
+    <p style="margin-top:8px;">Questions? Ask a family member, visit your <a href="https://www.aarp.org/" target="_blank" rel="noopener">local library</a>, or try <a href="https://www.seniorplanet.org/" target="_blank" rel="noopener">Senior Planet</a> for help.</p>
+  </footer>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-bar-container">
+    <span id="progressLabel">0% read</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+  <script>
+    // ========== THEME TOGGLE ==========
+    function toggleTheme() {
+      const html = document.documentElement;
+      const btn = document.getElementById('themeToggle');
+      if (html.getAttribute('data-theme') === 'light') {
+        html.setAttribute('data-theme', 'dark');
+        btn.innerHTML = '<span class="icon">☀️</span> Light Mode';
+        btn.classList.add('active');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        html.setAttribute('data-theme', 'light');
+        btn.innerHTML = '<span class="icon">🌙</span> Dark Mode';
+        btn.classList.remove('active');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    // ========== COLOR BLIND TOGGLE ==========
+    function toggleColorBlind() {
+      const html = document.documentElement;
+      const btn = document.getElementById('cbToggle');
+      if (html.getAttribute('data-colorblind') === 'off') {
+        html.setAttribute('data-colorblind', 'on');
+        btn.classList.add('active');
+        localStorage.setItem('colorblind', 'on');
+      } else {
+        html.setAttribute('data-colorblind', 'off');
+        btn.classList.remove('active');
+        localStorage.setItem('colorblind', 'off');
+      }
+    }
+
+    // ========== FONT SIZE ==========
+    function setFontSize(size) {
+      document.body.classList.remove('font-large', 'font-xlarge');
+      if (size === 'large') document.body.classList.add('font-large');
+      if (size === 'xlarge') document.body.classList.add('font-xlarge');
+      localStorage.setItem('fontSize', size);
+
+      // Update active states
+      document.querySelectorAll('.font-size-controls .a11y-btn').forEach((b, i) => {
+        b.classList.toggle('active', 
+          (size === 'normal' && i === 0) || 
+          (size === 'large' && i === 1) || 
+          (size === 'xlarge' && i === 2)
+        );
+      });
+    }
+
+    // ========== ACCORDION ==========
+    function toggleAccordion(trigger) {
+      const panel = trigger.nextElementSibling;
+      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', !isOpen);
+      panel.classList.toggle('open', !isOpen);
+    }
+
+    // ========== SCROLL PROGRESS ==========
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.round((scrollTop / docHeight) * 100) : 0;
+      document.getElementById('progressFill').style.width = progress + '%';
+      document.getElementById('progressLabel').textContent = progress + '% read';
+    }
+
+    // ========== BACK TO TOP VISIBILITY ==========
+    function updateBackToTop() {
+      const btn = document.getElementById('backToTop');
+      btn.classList.toggle('visible', window.scrollY > 400);
+    }
+
+    // ========== ACTIVE NAV HIGHLIGHT ==========
+    function updateActiveNav() {
+      const sections = document.querySelectorAll('.section');
+      const navLinks = document.querySelectorAll('.nav-link');
+      let current = '';
+      
+      sections.forEach(s => {
+        const top = s.offsetTop - 180;
+        if (window.scrollY >= top) current = s.getAttribute('id');
+      });
+
+      navLinks.forEach(link => {
+        link.classList.toggle('active-section', link.getAttribute('href') === '#' + current);
+      });
+    }
+
+    // ========== SCROLL EVENTS ==========
+    window.addEventListener('scroll', () => {
+      updateProgress();
+      updateBackToTop();
+      updateActiveNav();
+    }, { passive: true });
+
+    // ========== RESTORE PREFERENCES ON LOAD ==========
+    (function restorePreferences() {
+      const savedTheme = localStorage.getItem('theme');
+      const savedCB = localStorage.getItem('colorblind');
+      const savedFont = localStorage.getItem('fontSize');
+
+      if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        const btn = document.getElementById('themeToggle');
+        btn.innerHTML = '<span class="icon">☀️</span> Light Mode';
+        btn.classList.add('active');
+      }
+      if (savedCB === 'on') {
+        document.documentElement.setAttribute('data-colorblind', 'on');
+        document.getElementById('cbToggle').classList.add('active');
+      }
+      if (savedFont) setFontSize(savedFont);
+    })();
+
+    // Initial calls
+    updateProgress();
+    updateActiveNav();
+  </script>
+
+</body>
+</html>
